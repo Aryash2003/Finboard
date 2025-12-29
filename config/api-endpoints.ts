@@ -1,7 +1,7 @@
 import { ApiEndpoint } from '@/types/widget';
 
 export const API_BASE_URL = 'https://stock.indianapi.in';
-export const API_KEY = 'sk-live-8IYzmJ5IM4cyR67XXZDKn2t6jylZxnaq6UxKsRYb';
+export const API_KEY = process.env.NEXT_PUBLIC_INDIAN_STOCK_API_KEY;
 
 export const API_ENDPOINTS: ApiEndpoint[] = [
     {

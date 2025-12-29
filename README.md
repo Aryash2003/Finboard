@@ -1,36 +1,187 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finance Dashboard - Widget-Based Application
 
-## Getting Started
+A comprehensive, real-time finance dashboard built with **Next.js** and **Redux Toolkit** that enables dynamic widget creation for Indian Stock Market data visualization.
 
-First, run the development server:
+## 🚀 Features
+
+- **20+ API Endpoints** - IPO data, trending stocks, mutual funds, market news, and more
+- **Dynamic Widget Creation** - Multi-step modal with API testing and field selection
+- **3 Display Modes** - Card, Table, and Chart views for different data types
+- **Drag-and-Drop** - Reorder widgets with smooth animations
+- **Real-Time Updates** - Configurable auto-refresh intervals
+- **Data Persistence** - Widgets automatically saved to localStorage
+- **Responsive Design** - Optimized for desktop, tablet, and mobile
+
+## 📦 Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Next.js 16 | React framework with App Router |
+| Redux Toolkit | State management |
+| Tailwind CSS | Styling and responsive design |
+| @dnd-kit | Drag-and-drop functionality |
+| Recharts | Data visualization |
+| React Hot Toast | Notifications |
+| TypeScript | Type safety |
+
+## 🎯 Quick Start
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📊 Supported API Endpoints
 
-To learn more about Next.js, take a look at the following resources:
+### Market Data
+- IPO Data
+- Trending Stocks
+- Price Shockers
+- BSE/NSE Most Active
+- 52 Week High/Low
+- Commodities
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Stocks & Analysis
+- Stock Details
+- Stock Forecasts
+- Historical Data
+- Target Prices
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Funds & News
+- Mutual Funds
+- Fund Search
+- Market News
+- Corporate Actions
 
-## Deploy on Vercel
+## 🎨 Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Creating a Widget
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Click the **"Add Widget"** button in the header
+2. Enter a widget name
+3. Select an API endpoint from the dropdown
+4. Fill in required parameters (if any)
+5. Choose a display mode (Card/Table/Chart)
+6. Set refresh interval
+7. Click **"Test & Continue"** to validate the API
+8. Select fields to display
+9. Click **"Add Widget"** to create
+
+### Managing Widgets
+
+- **Refresh** - Click the refresh icon to update widget data
+- **Delete** - Click the trash icon to remove a widget
+- **Reorder** - Drag and drop widgets to rearrange
+- **Persistent** - Widgets automatically save and restore on page reload
+
+## 📁 Project Structure
+
+```
+my-app/
+├── app/
+│   ├── components/header.tsx       # Dashboard header
+│   ├── page.tsx                    # Main dashboard page
+│   ├── layout.tsx                  # Root layout
+│   ├── providers.tsx               # Redux Provider
+│   └── globals.css                 # Global styles
+├── components/
+│   ├── UI/                         # Reusable components
+│   ├── AddWidgetModal/             # Widget creation flow
+│   ├── Dashboard/                  # Widget grid
+│   └── Widget/                     # Display components
+├── store/
+│   ├── store.ts                    # Redux configuration
+│   ├── slices/widgetSlice.ts      # Widget state
+│   └── middleware/localStorage.ts  # Persistence
+├── config/api-endpoints.ts         # API configurations
+├── services/api.ts                 # API service layer
+├── hooks/                          # Custom React hooks
+├── types/                          # TypeScript definitions
+└── utils/                          # Helper functions
+```
+
+## 🔧 Configuration
+
+### API Key
+
+The Indian Stock API key is stored in `config/api-endpoints.ts`. For production, move this to environment variables:
+
+```env
+NEXT_PUBLIC_INDIAN_STOCK_API_KEY=your_api_key_here
+```
+
+### Customization
+
+- **Refresh Intervals** - Modify default in AddWidgetModal (currently 30 seconds)
+- **Cache Duration** - Adjust in `services/api.ts` (currently 30 seconds)
+- **Theme Colors** - Customize in `globals.css` and Tailwind config
+
+## 📸 Screenshots
+
+### Dashboard with Widget
+![Dashboard showing IPO data widget](./docs/dashboard-screenshot.png)
+
+### Add Widget Modal
+![Modal for creating new widgets](./docs/modal-screenshot.png)
+
+## 🎯 Key Components
+
+### WidgetCard
+Displays individual widgets with refresh/delete controls and three view modes.
+
+### AddWidgetModal
+Multi-step modal for widget configuration with API testing.
+
+### WidgetGrid
+Drag-and-drop sortable grid using @dnd-kit.
+
+### Redux Store
+Centralized state management with localStorage persistence.
+
+## 🔐 Security Note
+
+> **Warning**: The API key is currently exposed in the codebase. For production deployment:
+> - Use environment variables
+> - Implement Next.js API routes as proxy
+> - Add rate limiting
+> - Implement user authentication
+
+## 📝 License
+
+MIT
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 🐛 Known Issues
+
+- Minor Next.js hydration warning in development (does not affect functionality)
+- Export/Import feature not yet implemented
+
+## 🚧 Future Enhancements
+
+- [ ] Widget configuration export/import
+- [ ] User authentication and cloud sync
+- [ ] More chart types (candlestick, area, pie)
+- [ ] Widget templates library
+- [ ] Dark/light mode toggle
+- [ ] Advanced filtering and sorting
+
+---
+
+Built with ❤️ using Next.js and Redux

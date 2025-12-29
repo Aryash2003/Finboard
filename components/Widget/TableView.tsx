@@ -74,7 +74,7 @@ export const TableView: React.FC<TableViewProps> = ({ data, selectedFields }) =>
 
         if (categoryArrays.length > 0) {
             // Flatten all categories into single array, adding category field
-            categoryArrays.forEach(([categoryName, items]: [string, any[]]) => {
+            (categoryArrays as [string, any[]][]).forEach(([categoryName, items]) => {
                 categoryInfo[categoryName] = items.length;
                 items.forEach(item => {
                     allItems.push({

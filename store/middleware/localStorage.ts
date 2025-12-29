@@ -24,7 +24,7 @@ export const localStorageMiddleware: Middleware = (store) => (next) => (action) 
     return result;
 };
 
-export const loadState = (): any => {
+export const loadState = () => {
     // Check if we're in the browser
     if (typeof window === 'undefined') {
         return undefined;

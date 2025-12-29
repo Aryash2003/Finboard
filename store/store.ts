@@ -6,7 +6,6 @@ export const store = configureStore({
     reducer: {
         widgets: widgetReducer,
     },
-    preloadedState: loadState(),
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(localStorageMiddleware),
 });

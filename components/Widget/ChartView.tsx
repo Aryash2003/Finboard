@@ -89,13 +89,13 @@ export const ChartView: React.FC<ChartViewProps> = ({
     const chartData = useMemo(() => {
         // Handle nested JSON with categories (like IPO data)
         if (typeof data === 'object' && !Array.isArray(data)) {
-            const categoryArrays = Object.entries(data).filter(([_, value]) => Array.isArray(value));
+            const categoryArrays = Object.entries(data).filter(([_, value]) => Array.isArray(value)) as [string, any[]][];
 
             if (categoryArrays.length > 0) {
                 // Create chart from categorized data
                 const chartItems: any[] = [];
 
-                categoryArrays.forEach(([categoryName, items]: [string, any[]]) => {
+                categoryArrays.forEach(([categoryName, items]) => {
                     items.forEach((item, index) => {
                         const chartItem: any = {
                             name: `${formatLabel(categoryName)} ${index + 1}`,

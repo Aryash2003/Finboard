@@ -14,7 +14,7 @@ export const formatNumber = (value: number): string => {
     return new Intl.NumberFormat('en-IN').format(value);
 };
 
-export const formatDate = (timestamp: number): string => {
+export const formatDate = (timestamp: string | number): string => {
     const date = new Date(timestamp);
     return new Intl.DateTimeFormat('en-IN', {
         dateStyle: 'medium',

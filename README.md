@@ -118,11 +118,19 @@ my-app/
 
 ### API Key
 
-The Indian Stock API key is stored in `config/api-endpoints.ts`. For production, move this to environment variables:
+The Indian Stock API key is required for most endpoints. We proxy requests through a server-side route to avoid CORS and keep the key secret.
 
+Preferred (server-only):
+```env
+INDIAN_STOCK_API_KEY=your_api_key_here
+```
+
+Optional (public, not recommended):
 ```env
 NEXT_PUBLIC_INDIAN_STOCK_API_KEY=your_api_key_here
 ```
+
+After setting environment variables, restart the dev server so the new values are picked up.
 
 ### Customization
 

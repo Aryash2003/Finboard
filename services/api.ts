@@ -1,4 +1,5 @@
-import { API_BASE_URL, API_KEY } from '@/config/api-endpoints';
+
+import { API_BASE_URL } from '@/config/api-endpoints';
 
 interface FetchApiOptions {
     url: string;
@@ -10,7 +11,15 @@ export class ApiService {
     private static CACHE_DURATION = 30000; // 30 seconds
 
     static async fetchData({ url, params = {} }: FetchApiOptions): Promise<any> {
-        const fullUrl = this.buildUrl(url, params);
+        // Route requests through a local proxy to avoid CORS and expose the API key only on the server
+        const origin = typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
+        const proxyUrl = new URL('/api/proxy', origin);
+        proxyUrl.searchParams.append('endpoint', url);
+        Object.entries(params).forEach(([key, value]) => {
+            if (value) proxyUrl.searchParams.append(key, value);
+        });
+
+        const fullUrl = proxyUrl.toString();
         const cacheKey = fullUrl;
 
         // Check cache
@@ -23,7 +32,6 @@ export class ApiService {
             const response = await fetch(fullUrl, {
                 method: 'GET',
                 headers: {
-                    ...(API_KEY && { 'X-Api-Key': API_KEY }),
                     'Content-Type': 'application/json',
                 },
             });

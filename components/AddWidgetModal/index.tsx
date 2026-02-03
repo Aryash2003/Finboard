@@ -104,7 +104,15 @@ export const AddWidgetModal: React.FC<AddWidgetModalProps> = ({
 
             setStep('fields');
         } catch (error) {
-            toast.error('Connection failed. Please check your parameters.');
+            // Provide a clearer hint when fetch fails due to network/CORS/API key issues
+            if (error instanceof Error && error.message === 'Failed to fetch') {
+                toast.error('Connection failed: possible CORS or network error. Ensure the API key is set on the server and restart the dev server.');
+            } else if (error instanceof Error) {
+                toast.error(error.message || 'Connection failed. Please check your parameters.');
+            } else {
+                toast.error('Connection failed. Please check your parameters.');
+            }
+
             console.error(error);
         } finally {
             setTestLoading(false);
